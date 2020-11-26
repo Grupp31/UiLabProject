@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 	public class Controller {
 		
 	PersonRegister reg = new PersonRegister();
+	Person regPerson = new Person();
 			
 		@FXML
 		private TextField txtName;
@@ -30,7 +31,8 @@ import javafx.event.ActionEvent;
 		private TextField txtNbr;
 		@FXML
 		private TextField txtAmount;
-		
+		@FXML
+		private TextField txtPersonBalance;
 		@FXML
 		private Label lblResponse;
 	
@@ -56,41 +58,34 @@ import javafx.event.ActionEvent;
 		public void btnFindPerson_Click(ActionEvent event) {
 			String name = txtName.getText();
 			String pNbr = txtPNbr.getText();
-			Person findPerson(name, pNbr) {
-				for (Person tmp: persons) {
-					if (tmp.getPNbr().equals(pNbr)) {
-						return tmp; 
-					}
-				}
+			reg.findPerson(pNbr);
 			}
 			
 	
 			
 			@FXML
 			public void btnFindAccount_Click(ActionEvent event) {
-				String name = txtName.getText();
+				String accountNbr = txtName.getText();
 				String pNbr = txtPNbr.getText();
-				public Account findAccount(name, pNbr) {
-					for (int i = 0; i < persons.size(); i++) {
-						if (pNbr.equals(persons.get(i).getpNbr())) {
-							return persons.get(i).findAccount(accountNbr);
-				}
+				reg.findAccount(pNbr, accountNbr); 
 			}
-					
+			
 				
 			@FXML
-			public void btnTotBalance_Click(ActionEvent event) {
+			public void btnTotBalancePerson_Click(ActionEvent event) {
 				String name = txtName.getText();
 				String pNbr = txtPNbr.getText();
-				public double totBalancePerson(String pNbr) {
-					for (int i = 0; i < persons.size(); i++) {
-						if (pNbr.equals(persons.get(i).getpNbr())) {
-							return persons.get(i).totBalance();
+				Person p = reg.findPerson(pNbr);
+				reg.totBalancePerson(pNbr); 
+				regPerson.totBalance();
+				String balanceText = String.valueOf(p.totBalance());
+						if (p != null) {
+							reg.totBalancePerson(pNbr);
+							
+							totBalance.setText(balanceText);
 						}
-					}
-					return (Double) null;
-					lblResponse.setText("Response:");
-				
+			}
+					
 			@FXML
 			public void btnAddAccount_Click(ActionEvent event) {
 				String nbr = txtName.getText();

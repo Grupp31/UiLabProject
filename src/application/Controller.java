@@ -42,6 +42,91 @@ import javafx.event.ActionEvent;
 			String pNbr = txtPNbr.getText();
 			Person tmpPerson = new Person (name, pNbr);
 			lblResponse.setText("Response:");
+			
+			
+			
+			
+			
+			@FXML
+			public void btnFindPerson_Click(ActionEvent event) {
+				String name = txtName.getText();
+				String pNbr = txtPNbr.getText();
+				Person findPerson(name, pNbr) {
+					for (Person tmp: persons) {
+						if (tmp.getPNbr().equals(pNbr)) {
+							return tmp; 
+						}
+					}
+				}
+				lblResponse.setText("Response:");
+			
+				
+				@FXML
+				public void btnFindAccount_Click(ActionEvent event) {
+					String name = txtName.getText();
+					String pNbr = txtPNbr.getText();
+					public Account findAccount(pNbr, nbr) {
+						for (int i = 0; i < persons.size(); i++) {
+							if (pNbr.equals(persons.get(i).getpNbr())) {
+								return persons.get(i).findAccount(accountNbr);
+					}
+					lblResponse.setText("Response:");
+				
+					
+				@FXML
+				public void btnTotBalance_Click(ActionEvent event) {
+					String name = txtName.getText();
+					String pNbr = txtPNbr.getText();
+					public double totBalancePerson(String pNbr) {
+						for (int i = 0; i < persons.size(); i++) {
+							if (pNbr.equals(persons.get(i).getpNbr())) {
+								return persons.get(i).totBalance();
+							}
+						}
+						return (Double) null;
+						lblResponse.setText("Response:");
+					
+				@FXML
+				public void btnAddAccount_Click(ActionEvent event) {
+					String nbr = txtName.getText();
+					String pNbr = txtPNbr.getText();
+					Account addAccount(Accoount a) {
+						accounts.add(a); 
+					}
+							}
+						}
+					}
+					lblResponse.setText("Response:");
+				
+					
+					
+				@FXML
+				public void btnCredit_Click(ActionEvent event) {
+					String nbr = txtName.getText();
+					String pNbr = txtPNbr.getText();
+					public void credit(double amount) {
+						balance=balance+amount;
+						lblResponse.setText("Response:");
+					
+					
+						
+				@FXML
+				public void btnWithdraw_Click(ActionEvent event) {
+					String nbr = txtName.getText();
+					String pNbr = txtPNbr.getText();
+					public void withdraw (double amount) {
+						balance=balance-amount;
+						lblResponse.setText("Response:");
+				
+					
+					
+					
+					
+					
+					
+					
+					
+				
 			if (rbtnHasCard.isSelected()) {
 				String cardType = txtCardType.getText();
 				int cardNumber;

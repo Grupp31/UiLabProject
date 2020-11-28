@@ -3,6 +3,8 @@ package org.lu.ics.labs;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lu.ics.labs.Account;
+
 public class Person {
 	private String pNbr;
 	private String name;
@@ -13,6 +15,11 @@ public class Person {
 		this.pNbr=pNbr;
 		accounts=new ArrayList<>();
 	}
+	
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+	
 	public String getpNbr() {
 		return pNbr;
 	}

@@ -1,6 +1,5 @@
 package application;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import org.lu.ics.labs.Account;
@@ -39,12 +38,11 @@ public class Controller {
 	public void btnAdd_Click(ActionEvent event) {
 		String name = txtName.getText();
 		String pNbr = txtPNbr1.getText();
-		Person tmpPerson = new Person(name, pNbr);
-		reg.addPerson(tmpPerson);
+		Person p = new Person(name, pNbr);
+		reg.addPerson(p);
 		txtResponse.setText("Person tillagd");
 		
 		clearAllText();
-
 	}
 
 	@FXML
@@ -62,51 +60,38 @@ public class Controller {
 
 	@FXML
 	public void btnFindPerson_Click(ActionEvent event) {
-		String name = txtName.getText();
-		String pNbr = txtPNbr1.getText();
-		Person p = reg.findPerson(pNbr);
-		if (p != null) {
-			txtResponse.setText( p.getname() + " " + p.getpNbr());
-		} else {
-			txtResponse.setText("ingen person hittad");
-		}
-		clearAllText();
-
-	}
-
-	@FXML
-	public void btnFindAccount_Click(ActionEvent event) {
-		String Nbr = txtNbr1.getText();
-		String pNbr = txtPNbr2.getText();
-		Person p = reg.findPerson(pNbr);
-		if (p != null && p.findAccount(Nbr) != null ) {
-				Account a = p.findAccount(Nbr);
-				txtResponse.setText("kontonummer: " + a.getNbr() + "\n" + "saldo: " + a.getBalance());
-		}else {
-			txtResponse.setText("Inget konto eller person hittades");
-		}
-		clearAllText();
-	}
-
-	@FXML
-	public void btnTotBalancePerson_Click(ActionEvent event) {
-		String name = txtName.getText();
 		String pNbr = txtPNbr1.getText();
 		Person p = reg.findPerson(pNbr);
 		if (p != null) {
 			String balanceText = String.valueOf(p.totBalance());
-			txtResponse.setText(balanceText);
-		}else {
-			txtResponse.setText("Inget konto eller person hittades");
+			txtResponse.setText( p.getname() + " " + p.getpNbr() + "\n" + "Totala saldo: " + balanceText + "kr");
+		} else {
+			txtResponse.setText("Ingen person hittad");
 		}
+		clearAllText();
 	}
 
+	@FXML
+	public void btnShowAccounts_Click (ActionEvent event) {
+		String pNbr = txtPNbr1.getText();
+		Person p = reg.findPerson(pNbr);
+		if (p != null) {
+			List<Account> list = new ArrayList<>();
+			list = p.getAccounts();
+			txtResponse.setText("");
+			for (int i = 0; i<list.size(); i++) {
+				txtResponse.appendText("Account: " + list.get(i).getNbr() + " Saldo: " + list.get(i).getBalance() + "\n"  );
+			}		
+			clearAllText();			
+		}
+	
+	}
+	
 	@FXML
 	public void btnAddAccount_Click(ActionEvent event) {
 		String nbr = txtNbr1.getText();
 		String pNbr = txtPNbr2.getText();
 		Account a = new Account(nbr);
-
 		if (reg.findPerson(pNbr) != null) {
 			reg.findPerson(pNbr).addAccount(a);
 			txtResponse.setText("Konto tillagd");
@@ -115,7 +100,7 @@ public class Controller {
 		}
 		clearAllText();
 	}
-
+	
 	@FXML
 	public void btnCredit_Click(ActionEvent event) {
 		String nbr = txtNbr2.getText();
@@ -148,23 +133,6 @@ public class Controller {
 		clearAllText();		
 	}
 	
-	@FXML
-	public void btnShowAccounts_Click (ActionEvent event) {
-		String pNbr = txtPNbr1.getText();
-		Person p = reg.findPerson(pNbr);
-		if (p != null) {
-			List<Account> list = new ArrayList<>();
-			list = p.getAccounts();
-			txtResponse.setText("");
-			for (int i = 0; i<list.size(); i++) {
-				txtResponse.appendText("Account: " + list.get(i).getNbr() + " Saldo: " + list.get(i).getBalance() + "\n"  );
-			}
-				
-			clearAllText();			
-		}
-			
-	}
-
 	public void clearAllText() {
 		txtPNbr1.setText("");
 		txtPNbr2.setText("");
@@ -173,7 +141,6 @@ public class Controller {
 		txtNbr2.setText("");
 		txtName.setText("");
 		txtAmount.setText("");
-		
 	}
 
 }

@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonRegister {
-	private List<Person> persons;
+	private List<Person> persons = new ArrayList<>();
 	
-	public PersonRegister() {
-		persons=new ArrayList<>();
-	}
+
+
 	
 	public void addPerson(Person p) {
 		persons.add(p);
